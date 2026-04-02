@@ -25,6 +25,7 @@ class Solver:
         Raises:
             RuntimeError: ソルバーが最適解を見つけられなかった場合
         """
+        # 問題インスタンスから必要なデータを抽出
         prob = self._problem
         M = prob.M
         L = prob.L
