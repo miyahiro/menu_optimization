@@ -3,7 +3,6 @@ from __future__ import annotations
 from itertools import combinations
 
 from problem import Problem
-from solver import Solver
 
 
 # 栄養素リストとマッピング
@@ -234,49 +233,3 @@ def build_problem(
         past_meals=past_meals,
         time_limit=time_limit,
     )
-
-
-def print_solution(solution) -> None:
-    """Solution の内容を見やすく出力する。"""
-    meal_labels = ["朝食", "昼食", "夕食"]
-
-    problem = solution.problem
-    menus = solution.menus
-    nutritions = solution.nutritions
-    for day in range(problem.L):
-        for p in range(3):
-            meal_idx = day * 3 + p
-            dish_names = menus[meal_idx] if meal_idx < len(menus) else []
-            dish_text = ", ".join(dish_names) if dish_names else "(なし)"
-            print(f"  {meal_labels[p]}: {dish_text}")
-
-        day_nutritions = nutritions[day] if day < len(nutritions) else {}
-        for nutrient_id, nutrient_name in problem.nutrient_names.items():
-            total = day_nutritions.get(nutrient_name, 0.0)
-            target = problem.N[day][nutrient_id]
-            deviation = (total - target) / target * 100
-            print(f"  {nutrient_name}: {total:.1f} / {target:.1f} ({deviation:.1f}%)")
-
-
-def main() -> None:
-    """サンプル最適化の実行エントリポイント。"""
-    past_meal = INITIAL_PAST_MEAL.copy()
-    for day in range(1, 8):
-        print(f"Day {day}")
-
-        problem = build_problem(
-            past_meal=past_meal,
-            optimize_days=1,
-            min_dishes=2,
-            time_limit=20.0
-        )
-        solver = Solver(problem)
-        solution = solver.solve()
-
-        print_solution(solution)
-
-        past_meal.extend(solution.menus)
-
-
-if __name__ == "__main__":
-    main()

@@ -28,6 +28,10 @@
 
    サンプルの問題インスタンスを作成し、それに対する最適化結果を表示する実行可能モジュール
 
-7. [requirements.txt](./requirements.txt)
+7. [main.py](./main.py)
+
+   サンプルの問題インスタンスを作成し、それに対する最適化結果を表示する実行可能モジュール
+
+8. [requirements.txt](./requirements.txt)
 
    必要となるPythonモジュールを記述したファイル
